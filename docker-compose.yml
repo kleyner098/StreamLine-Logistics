@@ -1,0 +1,29 @@
+services:
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: ./microservice-eureka
+      dockerfile: Dockerfile
+    image: eureka-service:latest
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+    
+  order-service:
+    container_name: order-service
+    build:
+      context: ./microservice-order
+      dockerfile: Dockerfile
+    image: order-service:latest
+    ports:
+      - "8090:8090"
+    networks:
+      - microservices-network
+    depends_on:
+      - eureka-server
+
+# Definición de redes para aislar los servicios
+networks:
+  microservices-network:
+    driver: bridge
