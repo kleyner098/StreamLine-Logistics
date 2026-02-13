@@ -6,20 +6,20 @@ WORKDIR /app
 COPY pom.xml ./pom.xml 
 
 # Copiar el pom.xml de cada módulo para resolver dependencias
+COPY microservice-inventory/pom.xml ./microservice-inventory/
+COPY microservice-order/pom.xml ./microservice-order/
 COPY microservice-eureka/pom.xml ./microservice-eureka/
 COPY microservice-gateway/pom.xml ./microservice-gateway/
 COPY microservice-config/pom.xml ./microservice-config/
-COPY microservice-order/pom.xml ./microservice-order/
-COPY microservice-inventory/pom.xml ./microservice-inventory/
 
 # Descargar dependencias (Capa de caché)
 RUN mvn dependency:go-offline -B
 
-# Copiar el código fuente del módulo Eureka
-COPY microservice-eureka/src ./microservice-eureka/src
+# Copiar el código fuente del módulo Inventory
+COPY microservice-inventory/src ./microservice-inventory/src
 
 # Compilar específicamente este módulo 
-RUN mvn clean package -pl microservice-eureka -am -DskipTests
+RUN mvn clean package -pl microservice-inventory -am -DskipTests
 
 # Etapa de ejecución
 FROM eclipse-temurin:17-jre-alpine
@@ -30,10 +30,10 @@ RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
 # Copiar el jar desde la etapa de build
-COPY --from=build /app/microservice-eureka/target/*.jar app.jar
+COPY --from=build /app/microservice-inventory/target/*.jar app.jar
 
-# Exponer el puerto por defecto de Eureka
-EXPOSE 8761
+# Exponer el puerto en el que corre el microservicio
+EXPOSE 9090
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
 

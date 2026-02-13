@@ -22,6 +22,19 @@ services:
       - microservices-network
     depends_on:
       - eureka-server
+  
+  inventory-service:
+    container_name: inventory-service
+    build:
+      context: .
+      dockerfile: ./microservice-inventory/Dockerfile
+    image: inventory-service:latest
+    ports: 
+      - "9090:9090"
+    networks:
+      - microservices-network
+    depends_on:
+      - eureka-server
 
 # Definición de redes para aislar los servicios
 networks:
