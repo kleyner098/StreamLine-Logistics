@@ -6,21 +6,21 @@ WORKDIR /app
 COPY pom.xml ./pom.xml 
 
 # Copiar el pom.xml de cada módulo para resolver dependencias
+COPY microservice-tracking/pom.xml ./microservice-tracking/
+COPY microservice-inventory/pom.xml ./microservice-inventory/
 COPY microservice-order/pom.xml ./microservice-order/
 COPY microservice-eureka/pom.xml ./microservice-eureka/
 COPY microservice-gateway/pom.xml ./microservice-gateway/
 COPY microservice-config/pom.xml ./microservice-config/
-COPY microservice-inventory/pom.xml ./microservice-inventory/
-COPY microservice-tracking/pom.xml ./microservice-tracking/
 
 # Descargar dependencias (Capa de caché)
 RUN mvn dependency:go-offline -B
 
-# Copiar el código fuente del módulo Order
-COPY microservice-order/src ./microservice-order/src
+# Copiar el código fuente del módulo Tracking
+COPY microservice-tracking/src ./microservice-tracking/src
 
 # Compilar específicamente este módulo 
-RUN mvn clean package -pl microservice-order -am -DskipTests
+RUN mvn clean package -pl microservice-tracking -am -DskipTests
 
 # Etapa de ejecución
 FROM eclipse-temurin:17-jre-alpine
@@ -31,10 +31,10 @@ RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
 # Copiar el jar desde la etapa de build
-COPY --from=build /app/microservice-order/target/*.jar app.jar
+COPY --from=build /app/microservice-tracking/target/*.jar app.jar
 
 # Exponer el puerto en el que corre el microservicio
-EXPOSE 8090
+EXPOSE 9091
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
 

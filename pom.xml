@@ -23,6 +23,7 @@
     <module>microservice-config</module>
     <module>microservice-order</module>
     <module>microservice-inventory</module>
+    <module>microservice-tracking</module>
   </modules>
 
   <properties>

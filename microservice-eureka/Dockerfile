@@ -11,6 +11,7 @@ COPY microservice-gateway/pom.xml ./microservice-gateway/
 COPY microservice-config/pom.xml ./microservice-config/
 COPY microservice-order/pom.xml ./microservice-order/
 COPY microservice-inventory/pom.xml ./microservice-inventory/
+COPY microservice-tracking/pom.xml ./microservice-tracking/
 
 # Descargar dependencias (Capa de caché)
 RUN mvn dependency:go-offline -B

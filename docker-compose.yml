@@ -35,6 +35,19 @@ services:
       - microservices-network
     depends_on:
       - eureka-server
+  
+  tracking-service:
+    container_name: tracking-service
+    build:
+      context: .
+      dockerfile: ./microservice-tracking/Dockerfile
+    image: tracking-service:latest
+    ports:
+      - "8091:8091"
+    networks:
+      - microservices-network
+    depends_on:
+      - eureka-server
 
 # Definición de redes para aislar los servicios
 networks:
