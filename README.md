@@ -24,11 +24,11 @@ Estado inicial: PENDING_CHECK.
 
 ### C. Tracking Service (Gestor de Seguimiento)
 
-**Responsabilidad**: Registrar cada "salto" del paquete (Salida de almacén, en tránsito, entregado).
+**Responsabilidad**: Registrar el ciclo de vida completo y cada "salto" del paquete (Salida de almacén, en tránsito, aduanas, entregado).
 
-**Base de Datos**: PostgreSQL. (Ideal para auditoría y series temporales de estados).
+**Base de Datos**: MongoDB (NoSQL). Elegida por su esquema flexible (Schema-less), permitiendo que diferentes eventos de transporte guarden información dispar (como fotos de entrega, coordenadas GPS o incidencias climáticas) sin alterar la estructura de la base de datos.
 
-**Lógica Clave**: Genera el número de seguimiento único (UUID).
+**Lógica Clave**: Generación del trackingNumber único (UUID) y agregación de eventos en tiempo real
 
 ## 3. Infraestructura y Comunicación
 
@@ -92,21 +92,20 @@ Se responde al cliente con el ID del pedido.
   - ```quantity```: Integer (Cantidad disponible actual)
   - ```reservedQuantity```: Integer (Para pedidos en proceso pero no enviados aún)
 
-## C. Tracking Service (PostgreSQL)
+## C. Tracking Service (MongoDB)
 
-- Entidad ```Shipment```
-  - ```id```: Long (Primary Key)
+- Colección ```Shipment```
+  - ```_id```: ObjectId
   - ```orderId```: Long (Referencia al ID del Order Service)
   - ```trackingNumber```: String (El código que se le da al cliente)
   - ```carrier```: String (Ej: "DHL", "FedEx")
-  - ```estimatedDelivery```: LocalDateTime
-
-- Entidad ```TrackingEvent``` (Relación OneToMany)
-  - ```id```: Long
-  - ```shipmentId```: Long
-  - ```status```: String (Ej: "Recogido en almacén", "En aduanas", "Reparto local")
-  - ```location```: String (Ciudad/Coordenadas)
-  - ```timestamp```: LocalDateTime
+  - ```estimatedDelivery```: Date
+  - ```status````: String
+  - ```events```: Array[Object]
+    - ```status```: String (Ej: "Salida de almacén", "En tránsito", "Entregado")
+    - ```timestamp```: Date
+    - ```location```: String
+    - ```details```: String (Información adicional)
 
 ## 5. Comunicación entre servicios (Contratos DTO)
 
@@ -138,7 +137,7 @@ graph LR;
 
     subgraph Persistence [Bases de Datos]
         DB1[(PostgreSQL)]
-        DB3[(PostgreSQL)]
+        DB3[(MongoDB)]
         DB2[(MySQL)]
     end
 
