@@ -79,6 +79,20 @@ services:
       - microservices-network
     volumes:
       - inventorydb-data:/var/lib/mysql
+  
+  traking-db:
+    container_name: tracking_db
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    networks:
+      - microservices-network
+    volumes:
+      - trackingdb-data:/data/db
 
 # Redes de los microservicios
 networks:
@@ -89,3 +103,4 @@ networks:
 volumes:
   orderdb-data:
   inventorydb-data:
+  trackingdb-data:

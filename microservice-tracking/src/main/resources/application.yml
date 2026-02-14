@@ -1,14 +1,17 @@
 server:
   port: 8091
 
+mongodb:
+  user: root
+  password: password
+  database: trakcingdb
+
 spring:
   application:
     name: msvc-tracking
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/trackingdb
-    username: postgres
-    password: password
+  data:
+    mongodb:
+      uri: mongodb://${mongodb.user}:${mongodb.password}@localhost:27017/${mongodb.database}
   jpa:
     hibernate:
       ddl-auto: create
