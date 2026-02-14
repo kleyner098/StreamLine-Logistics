@@ -65,6 +65,21 @@ services:
     volumes:
       - orderdb-data:/var/lib/postgresql/data
 
+  inventory-db:
+    container_name: inventory_db
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: inventorydb
+    ports:
+      - "3306:3306"
+    networks:
+      - microservices-network
+    volumes:
+      - inventorydb-data:/var/lib/mysql
+
 # Redes de los microservicios
 networks:
   microservices-network:
@@ -73,3 +88,4 @@ networks:
 # Volúmenes para persistencia de datos
 volumes:
   orderdb-data:
+  inventorydb-data:
