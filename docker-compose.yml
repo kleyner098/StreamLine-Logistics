@@ -1,3 +1,4 @@
+
 services:
   eureka-server:
     container_name: eureka-server
@@ -48,8 +49,27 @@ services:
       - microservices-network
     depends_on:
       - eureka-server
+  
+  order-db:
+    container_name: order_db
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: orderdb
+    ports:
+      - "5432:5432"
+    networks:
+      - microservices-network
+    volumes:
+      - orderdb-data:/var/lib/postgresql/data
 
-# Definición de redes para aislar los servicios
+# Redes de los microservicios
 networks:
   microservices-network:
     driver: bridge
+
+# Volúmenes para persistencia de datos
+volumes:
+  orderdb-data:
