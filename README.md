@@ -130,9 +130,9 @@ graph LR;
     end
 
     subgraph Microservices [Lógica de Negocio]
-        Order[Order Service]
-        Inventory[Inventory Service]
-        Tracking[Tracking Service]
+        Order[Order Service :8090]
+        Inventory[Inventory Service :9090]
+        Tracking[Tracking Service :8091]
     end
 
     subgraph Persistence [Bases de Datos]
@@ -166,7 +166,7 @@ graph LR;
     Inventory === DB2
     Tracking === DB3
 
-    style Gateway fill:#f9f,stroke:#333,stroke-width:2px
-    style Eureka fill:#bbf,stroke:#333
-    style Config fill:#bbf,stroke:#333
+    style Gateway color:black,fill:#f9f,stroke:#333,stroke-width:2px
+    style Eureka color:black,fill:#bbf,stroke:#333
+    style Config color:black,fill:#bbf,stroke:#333
 ```
