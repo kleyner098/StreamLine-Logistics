@@ -1,8 +1,11 @@
 package com.microservice.inventory.infrastructure.adapter.output.persistence.Stock;
 
+import org.springframework.stereotype.Component;
+
 import com.microservice.inventory.application.port.output.StockRepository;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.mappers.StockEntityMapper;
 
+@Component
 public class StockRepositoryAdapter implements StockRepository{
 
     private final JpaStockRepository jpaStockRepository;

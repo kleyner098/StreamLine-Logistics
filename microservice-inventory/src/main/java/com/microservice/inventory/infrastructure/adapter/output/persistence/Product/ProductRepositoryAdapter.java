@@ -2,10 +2,13 @@ package com.microservice.inventory.infrastructure.adapter.output.persistence.Pro
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+
 import com.microservice.inventory.application.port.output.ProductRepository;
 import com.microservice.inventory.domain.model.Product;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.mappers.ProductEntityMapper;
 
+@Component
 public class ProductRepositoryAdapter implements ProductRepository {
 
     private final JpaProductRepository jpaProductRepository;
