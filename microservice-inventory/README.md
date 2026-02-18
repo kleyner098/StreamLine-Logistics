@@ -42,3 +42,7 @@ erDiagram
 ```
 
 ## Endpoints
+
+## Aclaraciones
+
+Las entidades `Product`y `Stock` no estan unidas por una relación directa con la anotación `@OneToOne` para evitar problemas de rendimiento y complejidad en las consultas. En su lugar, se utiliza el campo `productId` en la entidad `Stock` para establecer una relación lógica entre ambas entidades, lo que permite una gestión más eficiente del inventario sin necesidad de cargar toda la información del producto cada vez que se accede al stock. Además, esto facilita la creación de mappers personalizados para convertir entre las entidades de dominio y las entidades de persistencia, lo que mejora la flexibilidad y el rendimiento del sistema.
