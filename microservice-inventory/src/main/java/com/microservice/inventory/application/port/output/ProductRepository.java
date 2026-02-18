@@ -4,6 +4,6 @@ import java.util.Optional;
 
 import com.microservice.inventory.domain.model.Product;
 
-public interface ProductRepositoy {
+public interface ProductRepository {
     Optional<Product> findById(Long id);
 }
