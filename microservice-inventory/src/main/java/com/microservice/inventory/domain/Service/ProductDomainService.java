@@ -1,7 +1,7 @@
 package com.microservice.inventory.domain.Service;
 
 import com.microservice.inventory.application.port.input.GetProductDetailsUseCase;
-import com.microservice.inventory.application.port.output.ProductRepositoy;
+import com.microservice.inventory.application.port.output.ProductRepository;
 import com.microservice.inventory.application.port.output.StockRepository;
 import com.microservice.inventory.domain.exception.DomainException;
 import com.microservice.inventory.domain.model.Product;
@@ -10,10 +10,10 @@ import com.microservice.inventory.domain.model.Stock;
 
 public class ProductDomainService implements GetProductDetailsUseCase{
 
-    private final ProductRepositoy productRepositoy;
+    private final ProductRepository productRepositoy;
     private final StockRepository stockRepository;
 
-    public ProductDomainService(ProductRepositoy productRepositoy, StockRepository stockRepository) {
+    public ProductDomainService(ProductRepository productRepositoy, StockRepository stockRepository) {
         this.productRepositoy = productRepositoy;
         this.stockRepository = stockRepository;
     }
