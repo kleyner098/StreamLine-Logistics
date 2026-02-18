@@ -17,7 +17,7 @@ public class Product {
     private final String description;
     private final Price price;
 
-    Product( Long id, Sku sku, String name, String description, Price price) {
+    public Product( Long id, Sku sku, String name, String description, Price price) {
         validateName(name);
         
         this.id = id;
