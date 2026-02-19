@@ -8,12 +8,12 @@ import com.microservice.inventory.domain.model.Product;
 import com.microservice.inventory.domain.model.ProductDetails;
 import com.microservice.inventory.domain.model.Stock;
 
-public class ProductDomainService implements GetProductDetailsUseCase{
+public class GetProductDomainService implements GetProductDetailsUseCase{
 
     private final ProductRepository productRepositoy;
     private final StockRepository stockRepository;
 
-    public ProductDomainService(ProductRepository productRepositoy, StockRepository stockRepository) {
+    public GetProductDomainService(ProductRepository productRepositoy, StockRepository stockRepository) {
         this.productRepositoy = productRepositoy;
         this.stockRepository = stockRepository;
     }
