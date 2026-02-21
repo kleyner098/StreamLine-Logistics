@@ -3,6 +3,7 @@ package com.microservice.inventory.infrastructure.adapter.output.persistence.Sto
 import org.springframework.stereotype.Component;
 
 import com.microservice.inventory.application.port.output.StockRepository;
+import com.microservice.inventory.domain.model.Stock;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.mappers.StockEntityMapper;
 
 @Component
@@ -23,10 +24,10 @@ public class StockRepositoryAdapter implements StockRepository{
     }
 
     @Override
-    public Long save(Long productId, String stock) {
+    public Long save(Long productId, Stock stockModel) {
         StockEntity newStockEntity = StockEntity.builder()
                 .productId(productId)
-                .totalQuantity(Integer.parseInt(stock))
+                .totalQuantity(stockModel.getTotalQuantity())
                 .totalReserved(0)
                 .build();
                 

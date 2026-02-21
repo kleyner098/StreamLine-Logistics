@@ -19,14 +19,14 @@ public class CreateProductDomainService implements CreateProductUseCase{
 
 
     @Override
-    public Long createProduct(Product product, Stock stock) {
+    public Long createProduct(Product productModel, Stock stockModel) {
         
-        if (productRepository.findBySku(product.getSku().value()).isPresent()) {
+        if (productRepository.findBySku(productModel.getSku().value()).isPresent()) {
             throw new DomainException("El SKU ya existe");
         }
 
-        Long productId = productRepository.save(product);
-        stockRepository.save(productId, stock.getTotalQuantity());
+        Long productId = productRepository.save(productModel);
+        stockRepository.save(productId, stockModel);
 
         return productId;
     }
