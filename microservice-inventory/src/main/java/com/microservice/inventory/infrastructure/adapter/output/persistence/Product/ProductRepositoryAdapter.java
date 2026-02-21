@@ -25,6 +25,12 @@ public class ProductRepositoryAdapter implements ProductRepository {
                 .map(productEntityMapper::toDomain);
     }
 
+    @Override
+    public Optional<Product> findBySku(String sku) {
+        return jpaProductRepository.findBySku(sku)
+                .map(productEntityMapper::toDomain);
+    }
+
 
 
 }
