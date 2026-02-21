@@ -4,7 +4,7 @@
 
 El sistema gestiona el ciclo de vida de un pedido desde su creación hasta su entrega final, asegurando que el stock sea consistente y que el cliente pueda seguir su paquete en tiempo real.
 
-## Técnologías Clave:
+## Técnologías Clave
 
 - **Spring Boot**: Para el desarrollo de microservicios.
 - **Spring JPA**: Para la interacción con bases de datos relacionales.
