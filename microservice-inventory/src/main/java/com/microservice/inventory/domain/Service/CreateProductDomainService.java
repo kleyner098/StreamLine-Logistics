@@ -4,6 +4,8 @@ import com.microservice.inventory.application.port.input.CreateProductUseCase;
 import com.microservice.inventory.application.port.output.ProductRepository;
 import com.microservice.inventory.application.port.output.StockRepository;
 import com.microservice.inventory.domain.exception.DomainException;
+import com.microservice.inventory.domain.model.Product;
+import com.microservice.inventory.domain.model.Stock;
 
 public class CreateProductDomainService implements CreateProductUseCase{
 
@@ -17,14 +19,14 @@ public class CreateProductDomainService implements CreateProductUseCase{
 
 
     @Override
-    public Long createProduct(String sku, String name, String description, Double price, String stock) {
+    public Long createProduct(Product product, Stock stock) {
         
-        if (productRepository.findBySku(sku).isPresent()) {
+        if (productRepository.findBySku(product.getSku().value()).isPresent()) {
             throw new DomainException("El SKU ya existe");
         }
 
-        Long productId = productRepository.save(sku, name, description, price);
-        stockRepository.save(productId, stock);
+        Long productId = productRepository.save(product);
+        stockRepository.save(productId, stock.getTotalQuantity());
 
         return productId;
     }
