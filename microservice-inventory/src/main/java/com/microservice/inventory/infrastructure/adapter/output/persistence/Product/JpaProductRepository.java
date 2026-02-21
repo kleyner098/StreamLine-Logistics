@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface JpaProductRepository {
     Optional<ProductEntity> findById(Long id);
     Optional<ProductEntity> findBySku(String sku);
+    Long save(ProductEntity productEntity);
 }

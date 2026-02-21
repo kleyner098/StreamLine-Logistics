@@ -6,4 +6,5 @@ import com.microservice.inventory.domain.model.Stock;
 
 public interface StockRepository {
     Optional<Stock> findByProductId(Long productId);
+    Long save(Long productId, String stock);
 }

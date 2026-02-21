@@ -21,4 +21,16 @@ public class StockRepositoryAdapter implements StockRepository{
         return jpaStockRepository.findByProductId(productId)
                 .map(stockEntity -> stockEntityMapper.toDomain(stockEntity));
     }
+
+    @Override
+    public Long save(Long productId, String stock) {
+        StockEntity newStockEntity = StockEntity.builder()
+                .productId(productId)
+                .totalQuantity(Integer.parseInt(stock))
+                .totalReserved(0)
+                .build();
+                
+        return jpaStockRepository.save(newStockEntity);
+    
+    }
 }

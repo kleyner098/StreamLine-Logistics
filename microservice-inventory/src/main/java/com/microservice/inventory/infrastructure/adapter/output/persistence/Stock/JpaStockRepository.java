@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JpaStockRepository {
     Optional<StockEntity> findByProductId(Long productId);
+    Long save(StockEntity stockEntity);
 }

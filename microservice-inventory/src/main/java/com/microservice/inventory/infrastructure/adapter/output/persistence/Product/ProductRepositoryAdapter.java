@@ -1,5 +1,6 @@
 package com.microservice.inventory.infrastructure.adapter.output.persistence.Product;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
@@ -29,6 +30,18 @@ public class ProductRepositoryAdapter implements ProductRepository {
     public Optional<Product> findBySku(String sku) {
         return jpaProductRepository.findBySku(sku)
                 .map(productEntityMapper::toDomain);
+    }
+
+    @Override
+    public Long save(String sku, String name, String description, Double price) {
+        ProductEntity newProductEntity = ProductEntity.builder()
+                .sku(sku)
+                .name(name)
+                .description(description)
+                .price(price != null ? BigDecimal.valueOf(price) : null)
+                .build();
+                
+        return jpaProductRepository.save(newProductEntity);
     }
 
 
