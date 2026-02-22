@@ -3,9 +3,9 @@ package com.microservice.inventory.infrastructure.adapter.output.persistence.map
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.microservice.inventory.domain.model.Price;
 import com.microservice.inventory.domain.model.Product;
-import com.microservice.inventory.domain.model.Sku;
+import com.microservice.inventory.domain.valueobject.Price;
+import com.microservice.inventory.domain.valueobject.Sku;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.Product.ProductEntity;
 
 @Mapper(componentModel = "spring")

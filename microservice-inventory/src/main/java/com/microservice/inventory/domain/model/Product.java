@@ -1,6 +1,8 @@
 package com.microservice.inventory.domain.model;
 
 import com.microservice.inventory.domain.exception.DomainException;
+import com.microservice.inventory.domain.valueobject.Price;
+import com.microservice.inventory.domain.valueobject.Sku;
 
 
 /**

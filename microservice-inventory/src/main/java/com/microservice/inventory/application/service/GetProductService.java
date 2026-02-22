@@ -1,4 +1,4 @@
-package com.microservice.inventory.domain.Service;
+package com.microservice.inventory.application.service;
 
 import com.microservice.inventory.application.port.input.GetProductDetailsUseCase;
 import com.microservice.inventory.application.port.output.ProductRepository;
@@ -8,12 +8,12 @@ import com.microservice.inventory.domain.model.Product;
 import com.microservice.inventory.domain.model.ProductDetails;
 import com.microservice.inventory.domain.model.Stock;
 
-public class GetProductDomainService implements GetProductDetailsUseCase{
+public class GetProductService implements GetProductDetailsUseCase{
 
     private final ProductRepository productRepositoy;
     private final StockRepository stockRepository;
 
-    public GetProductDomainService(ProductRepository productRepositoy, StockRepository stockRepository) {
+    public GetProductService(ProductRepository productRepositoy, StockRepository stockRepository) {
         this.productRepositoy = productRepositoy;
         this.stockRepository = stockRepository;
     }

@@ -7,5 +7,5 @@ import com.microservice.inventory.domain.model.Product;
 public interface ProductRepository {
     Optional<Product> findById(Long id);
     Optional<Product> findBySku(String sku);
-    Long save(Product product);
+    Product save(Product product);
 }

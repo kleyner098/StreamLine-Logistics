@@ -32,15 +32,16 @@ public class ProductRepositoryAdapter implements ProductRepository {
     }
 
     @Override
-    public Long save(Product productModel) {
+    public Product save(Product productModel) {
         ProductEntity newProductEntity = ProductEntity.builder()
                 .sku(productModel.getSku().value())
                 .name(productModel.getName())
                 .description(productModel.getDescription())
                 .price(productModel.getPrice().amount())
                 .build();
-                
-        return jpaProductRepository.save(newProductEntity);
+               
+        ProductEntity savedEntity = jpaProductRepository.save(newProductEntity);
+        return productEntityMapper.toDomain(savedEntity);    
     }
 
 

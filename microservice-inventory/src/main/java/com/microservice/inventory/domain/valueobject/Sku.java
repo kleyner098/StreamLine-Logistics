@@ -1,4 +1,4 @@
-package com.microservice.inventory.domain.model;
+package com.microservice.inventory.domain.valueobject;
 
 import com.microservice.inventory.domain.exception.DomainException;
 

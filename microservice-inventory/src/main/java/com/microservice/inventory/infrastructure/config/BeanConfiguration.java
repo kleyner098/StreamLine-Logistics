@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import com.microservice.inventory.application.port.input.GetProductDetailsUseCase;
 import com.microservice.inventory.application.port.output.ProductRepository;
 import com.microservice.inventory.application.port.output.StockRepository;
-import com.microservice.inventory.domain.Service.CreateProductDomainService;
-import com.microservice.inventory.domain.Service.GetProductDomainService;
+import com.microservice.inventory.application.service.CreateProductService;
+import com.microservice.inventory.application.service.GetProductService;
 
 @Configuration
 public class BeanConfiguration {
@@ -17,11 +17,11 @@ public class BeanConfiguration {
         StockRepository stockRepository) {
         
         
-        return new GetProductDomainService(productRepository, stockRepository);
+        return new GetProductService(productRepository, stockRepository);
     }
 
     @Bean
-    public CreateProductDomainService createProductDomainService(ProductRepository productRepository, StockRepository stockRepository) {
-        return new CreateProductDomainService(productRepository, stockRepository);
+    public CreateProductService createProductService(ProductRepository productRepository, StockRepository stockRepository) {
+        return new CreateProductService(productRepository, stockRepository);
     }
 }
