@@ -18,7 +18,7 @@ public class Stock {
 
     public Stock(Long id, Long productId, int totalQuantity, int totalReserved) {
 
-        validateProduct(productId);
+        // validateProduct(productId);
         validateQuantity(totalQuantity);
         validateReserved(totalReserved);
 

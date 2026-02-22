@@ -1,5 +1,7 @@
 package com.microservice.inventory.infrastructure.adapter.input.rest;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,7 +59,7 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ResponseEntity<ProductReponseDto> createProduct(@RequestBody ProductCreateDto createDto){
+    public ResponseEntity<ProductReponseDto> createProduct(@Valid @RequestBody ProductCreateDto createDto){
 
 
         
