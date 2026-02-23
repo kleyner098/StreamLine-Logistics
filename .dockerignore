@@ -1,25 +1,45 @@
-**/.classpath
-**/.dockerignore
-**/.env
-**/.git
-**/.gitignore
-**/.project
-**/.settings
-**/.toolstarget
-**/.vs
-**/.vscode
-**/*.*proj.user
-**/*.dbmdl
-**/*.jfm
-**/bin
-**/charts
+# 1. Directorios de construcción (Los más pesados)
+# Ignoramos las carpetas donde se compila el .jar o .war
+target/
+build/
+out/
+bin/
+
+# 2. Herramientas de construcción (Wrapper)
+# Si usas el wrapper de Maven o Gradle, no suelen ser necesarios dentro de la imagen final
+.mvn/
+.gradle/
+*.gradle
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.nextSnapshot
+pom.xml.proxyBackup
+
+# 3. Archivos del IDE (Evita conflictos de configuración)
+.settings/
+.classpath
+.project
+.nb-gradle/
+.idea/
+*.iml
+*.iws
+.vscode/
+
+# 4. Logs y temporales de Spring
+logs/
+*.log
+temp/
+/tmp/
+
+# 5. Docker y Orquestación (Tu pregunta original)
 **/docker-compose*
-**/compose*
-**/Dockerfile*
-**/node_modules
-**/npm-debug.log
-**/obj
-**/secrets.dev.yaml
-**/values.dev.yaml
-LICENSE
-README.md
+Dockerfile*
+.dockerignore
+
+# 6. Secretos y Configuración Local
+# Muy importante si tienes passwords en tus application-local.properties
+.env
+src/main/resources/application-local.properties
+application-dev.yml
+*.jks
+*.p12
