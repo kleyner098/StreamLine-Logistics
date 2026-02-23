@@ -31,7 +31,7 @@ logs/
 temp/
 /tmp/
 
-# 5. Docker y Orquestación (Tu pregunta original)
+# 5. Docker y Orquestación
 **/docker-compose*
 Dockerfile*
 .dockerignore
