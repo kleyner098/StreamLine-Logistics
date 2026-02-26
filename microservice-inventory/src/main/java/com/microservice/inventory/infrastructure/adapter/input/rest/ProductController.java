@@ -2,6 +2,7 @@ package com.microservice.inventory.infrastructure.adapter.input.rest;
 
 import jakarta.validation.Valid;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.microservice.inventory.application.dto.ProductCreateDto;
 import com.microservice.inventory.application.dto.ProductReponseDto;
@@ -59,7 +61,11 @@ public class ProductController {
     public ResponseEntity<ProductReponseDto> getProductById(@PathVariable Long id) {
     
         ProductDetails details = getProductDetailsUseCase.getProductDetails(id);
-    
+
+        if (details.product() == null && details.stock() == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         ProductReponseDto response = productResponseDtoMapper.toResponse(details);
         
         return ResponseEntity.ok(response);
@@ -68,15 +74,18 @@ public class ProductController {
     @PostMapping()
     public ResponseEntity<ProductReponseDto> createProduct(@Valid @RequestBody ProductCreateDto createDto){
 
-
-        
         Product product = productCreateDtoMapper.toDomain(createDto);
         Stock stock = stockCreateDtoMapper.toDomain(createDto);
 
-        ProductDetails newProduct = createProductUseCase.createProduct(product, stock);
+        ProductDetails SavedProduct = createProductUseCase.createProduct(product, stock);
         
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(SavedProduct.product().getId())
+                .toUri();
         
-        ProductReponseDto response = productResponseDtoMapper.toResponse(newProduct);
-        return ResponseEntity.ok(response);
+        ProductReponseDto response = productResponseDtoMapper.toResponse(SavedProduct);
+
+        return ResponseEntity.created(location).body(response);
     }
 }
