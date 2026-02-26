@@ -2,6 +2,8 @@ package com.microservice.inventory.infrastructure.adapter.input.rest;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +20,7 @@ import com.microservice.inventory.application.port.input.GetProductDetailsUseCas
 import com.microservice.inventory.domain.model.Product;
 import com.microservice.inventory.domain.model.ProductDetails;
 import com.microservice.inventory.domain.model.Stock;
-import com.microservice.inventory.infrastructure.adapter.input.rest.mapper.ProductCreateDtoMapperImpl;
+import com.microservice.inventory.infrastructure.adapter.input.rest.mapper.ProductCreateDtoMapper;
 import com.microservice.inventory.infrastructure.adapter.input.rest.mapper.StockCreateDtoMapper;
 
 @RestController
@@ -29,13 +31,13 @@ public class ProductController {
     private final ProductResponseDtoMapper productResponseDtoMapper;
     private final CreateProductUseCase createProductUseCase;
     private final StockCreateDtoMapper stockCreateDtoMapper;
-    private final ProductCreateDtoMapperImpl productCreateDtoMapper;
+    private final ProductCreateDtoMapper productCreateDtoMapper;
 
     public ProductController(GetProductDetailsUseCase getProductDetailsUseCase, 
             ProductResponseDtoMapper productResponseDtoMapper, 
             CreateProductUseCase createProductUseCase, 
             StockCreateDtoMapper stockCreateDtoMapper, 
-            ProductCreateDtoMapperImpl productCreateDtoMapper) {
+            ProductCreateDtoMapper productCreateDtoMapper) {
         this.getProductDetailsUseCase = getProductDetailsUseCase;
         this.productResponseDtoMapper = productResponseDtoMapper;
         this.createProductUseCase = createProductUseCase;
@@ -44,8 +46,13 @@ public class ProductController {
     }
 
     @GetMapping()
-    public String getProducts() {
-        return "List of products";
+    public ResponseEntity<List<ProductReponseDto>> getProducts() {
+        
+        List<ProductDetails> productDetailsList = getProductDetailsUseCase.getAllProducts();
+
+        List<ProductReponseDto> responseList = productResponseDtoMapper.toResponseList(productDetailsList);
+
+        return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/{id}")
