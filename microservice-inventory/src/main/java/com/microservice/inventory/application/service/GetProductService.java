@@ -2,7 +2,6 @@ package com.microservice.inventory.application.service;
 
 import java.util.ArrayList;
 
-import com.microservice.inventory.application.exception.ApplicationException;
 import com.microservice.inventory.application.port.input.GetProductDetailsUseCase;
 import com.microservice.inventory.application.port.output.ProductRepository;
 import com.microservice.inventory.application.port.output.StockRepository;
@@ -22,12 +21,10 @@ public class GetProductService implements GetProductDetailsUseCase{
 
     @Override
     public ProductDetails getProductDetails(Long productId) {
-        Product product = productRepository.findById(productId)
-            .orElseThrow(() -> new ApplicationException("Producto con ID " + productId + " no encontrado"));
-
-        Stock stock = stockRepository.findByProductId(productId)
-            .orElseThrow(() -> new ApplicationException("Stock no disponible para el producto con ID " + productId));
         
+        Product product = productRepository.findById(productId).orElse(null);
+
+        Stock stock = stockRepository.findByProductId(productId).orElse(null);        
         return new ProductDetails(product, stock);
     }
 
@@ -36,8 +33,7 @@ public class GetProductService implements GetProductDetailsUseCase{
         ArrayList<ProductDetails> allProducts = new ArrayList<>();
 
         for (Product product : productRepository.findAll()) {
-            Stock stock = stockRepository.findByProductId(product.getId())
-                .orElseThrow(() -> new ApplicationException("Stock no disponible para el producto con ID " + product.getId()));
+            Stock stock = stockRepository.findByProductId(product.getId()).orElse(null);
             
             allProducts.add(new ProductDetails(product, stock));
         }
