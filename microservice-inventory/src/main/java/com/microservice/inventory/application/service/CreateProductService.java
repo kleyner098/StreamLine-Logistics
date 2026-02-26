@@ -1,9 +1,9 @@
 package com.microservice.inventory.application.service;
 
+import com.microservice.inventory.application.exception.ApplicationException;
 import com.microservice.inventory.application.port.input.CreateProductUseCase;
 import com.microservice.inventory.application.port.output.ProductRepository;
 import com.microservice.inventory.application.port.output.StockRepository;
-import com.microservice.inventory.domain.exception.DomainException;
 import com.microservice.inventory.domain.model.Product;
 import com.microservice.inventory.domain.model.ProductDetails;
 import com.microservice.inventory.domain.model.Stock;
@@ -23,7 +23,7 @@ public class CreateProductService implements CreateProductUseCase{
     public ProductDetails createProduct(Product productModel, Stock stockModel) {
         
         if (productRepository.findBySku(productModel.getSku().value()).isPresent()) {
-            throw new DomainException("El SKU ya existe");
+            throw new ApplicationException("El SKU ya existe");
         }
 
         Product product = productRepository.save(productModel);
