@@ -4,14 +4,18 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.NullValueCheckStrategy;
+import org.mapstruct.NullValueMappingStrategy;
 
 import com.microservice.inventory.application.dto.ProductReponseDto;
 import com.microservice.inventory.domain.model.ProductDetails;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
+    nullValueIterableMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT
+)
 public interface ProductResponseDtoMapper {
 
-    @Mapping(target = "id", source = "product.id")
     @Mapping(target = "sku", source = "product.sku.value") 
     @Mapping(target = "name", source = "product.name")
     @Mapping(target = "description", source = "product.description")
