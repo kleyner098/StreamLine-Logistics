@@ -66,9 +66,9 @@ public class Stock {
     
 
     //Validaciones
-    private void validateProduct(Long product) {
+    /*private void validateProduct(Long product) {
         if (product == null) throw new DomainException("El producto es obligatorio");
-    }
+    }*/
 
     private void validateQuantity(int quantity) {
         if (quantity < 0) throw new DomainException("La cantidad no puede ser negativa");

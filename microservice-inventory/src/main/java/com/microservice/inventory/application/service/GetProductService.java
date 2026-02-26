@@ -1,5 +1,7 @@
 package com.microservice.inventory.application.service;
 
+import java.util.ArrayList;
+
 import com.microservice.inventory.application.exception.ApplicationException;
 import com.microservice.inventory.application.port.input.GetProductDetailsUseCase;
 import com.microservice.inventory.application.port.output.ProductRepository;
@@ -27,6 +29,20 @@ public class GetProductService implements GetProductDetailsUseCase{
             .orElseThrow(() -> new ApplicationException("Stock no disponible para el producto con ID " + productId));
         
         return new ProductDetails(product, stock);
+    }
+
+    @Override
+    public ArrayList<ProductDetails> getAllProducts() {
+        ArrayList<ProductDetails> allProducts = new ArrayList<>();
+
+        for (Product product : productRepository.findAll()) {
+            Stock stock = stockRepository.findByProductId(product.getId())
+                .orElseThrow(() -> new ApplicationException("Stock no disponible para el producto con ID " + product.getId()));
+            
+            allProducts.add(new ProductDetails(product, stock));
+        }
+
+        return allProducts;
     }
 
 
