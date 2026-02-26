@@ -1,5 +1,6 @@
 package com.microservice.inventory.infrastructure.adapter.output.persistence.Product;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
@@ -42,6 +43,12 @@ public class ProductRepositoryAdapter implements ProductRepository {
                
         ProductEntity savedEntity = jpaProductRepository.save(newProductEntity);
         return productEntityMapper.toDomain(savedEntity);    
+    }
+
+    @Override
+    public List<Product> findAll() {
+        List<ProductEntity> productEntities = jpaProductRepository.findAll();
+        return productEntityMapper.toDomainList(productEntities);
     }
 
 
