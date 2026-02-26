@@ -1,5 +1,7 @@
 package com.microservice.inventory.infrastructure.adapter.output.persistence.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -25,5 +27,11 @@ public interface ProductEntityMapper {
             entity.getDescription(),
             new Price(entity.getPrice())
         );
+    }
+
+    default List<Product> toDomainList(List<ProductEntity> entities) {
+        return entities.stream()
+                .map(this::toDomain)
+                .toList();
     }
 }
