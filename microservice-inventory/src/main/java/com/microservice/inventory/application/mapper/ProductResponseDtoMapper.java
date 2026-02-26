@@ -1,5 +1,7 @@
 package com.microservice.inventory.application.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -23,4 +25,6 @@ public interface ProductResponseDtoMapper {
         if (details.stock() == null) return 0;
         return details.stock().available();
     }
+
+    List<ProductReponseDto> toResponseList(List<ProductDetails> detailsList);
 }
