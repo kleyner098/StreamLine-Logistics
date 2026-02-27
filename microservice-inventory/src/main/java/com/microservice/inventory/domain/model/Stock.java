@@ -20,7 +20,7 @@ public class Stock {
 
         // validateProduct(productId);
         validateQuantity(totalQuantity);
-        validateReserved(totalReserved);
+        validateReserved(totalReserved, totalQuantity);
 
         this.id = id;
         this.productId = productId;
@@ -37,7 +37,7 @@ public class Stock {
 
     public Stock confirmReservation(int amount) {
         if (amount > totalReserved) throw new DomainException("No hay suficiente stock reservado para reducir. Stock reservado: " + totalReserved);
-        validateReserved(amount);
+        validateReserved(amount, totalQuantity);
         validateQuantity(amount);
         return new Stock(this.id, this.productId, this.totalQuantity - amount, this.totalReserved - amount);
     }
@@ -49,7 +49,7 @@ public class Stock {
      */
     public Stock reserveStock(int amount) {
         if (amount > available()) throw new DomainException("No hay suficiente stock disponible para reservar. Stock disponible: " + available());
-        validateReserved(amount);
+        validateReserved(amount, totalQuantity);
         return new Stock(this.id, this.productId, this.totalQuantity, this.totalReserved + amount);
     }
 
@@ -60,7 +60,7 @@ public class Stock {
      */
     public Stock releaseStock(int amount) {
         if (amount > totalReserved) throw new DomainException("No hay suficiente stock reservado para liberar. Stock reservado: " + totalReserved);
-        validateReserved(amount);
+        validateReserved(amount, totalQuantity);
         return new Stock(this.id, this.productId, this.totalQuantity, this.totalReserved - amount);
     }
     
@@ -74,7 +74,7 @@ public class Stock {
         if (quantity < 0) throw new DomainException("La cantidad no puede ser negativa");
     }
 
-    private void validateReserved(int reserved) {
+    private void validateReserved(int reserved, int totalQuantity) {
         if (reserved < 0) throw new DomainException("La cantidad reservada no puede ser negativa");
         if (reserved > totalQuantity) throw new DomainException("La cantidad reservada no puede ser mayor que la cantidad total");
     }
