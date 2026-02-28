@@ -4,6 +4,6 @@ public record ProductDetails(Product product,
     Stock stock
 ) {
     public boolean isOutOfStock() {
-        return stock == null || stock.available() <= 0;
+        return stock == null || stock == null;
     }
 }
