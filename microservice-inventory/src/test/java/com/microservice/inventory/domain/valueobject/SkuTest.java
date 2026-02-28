@@ -1,6 +1,7 @@
 package com.microservice.inventory.domain.valueobject;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,9 @@ public class SkuTest {
     @Test
     @DisplayName("Crear un SKU con un valor nulo")
     void createSkuWithNullValue() {
-        assertThrows(DomainException.class,
+        DomainException exception = assertThrows(DomainException.class,
             () -> new Sku(null));
+        assertTrue(exception.getMessage().equals("El SKU es obligatorio"));
     }
 
 }
