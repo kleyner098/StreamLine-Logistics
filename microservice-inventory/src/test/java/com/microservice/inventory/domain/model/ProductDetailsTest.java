@@ -56,4 +56,18 @@ public class ProductDetailsTest {
         assertTrue(exception.getMessage().equals("El producto y el stock no corresponden al mismo producto"));
     }
     
+    @Test
+    @DisplayName("Stock no disponible")
+    void checkStockNoAvailable() {
+         Stock zeroStock = new Stock(2L, 1L, 0, 0);
+        ProductDetails productDetails = new ProductDetails(product, zeroStock);
+        assertTrue(productDetails.isOutOfStock() == true);
+    }
+
+    @Test
+    @DisplayName("Stock disponible")
+    void checkStockAvailable() {
+        ProductDetails productDetails = new ProductDetails(product, stock);
+        assertTrue(productDetails.isOutOfStock() == false);
+    }
 }
