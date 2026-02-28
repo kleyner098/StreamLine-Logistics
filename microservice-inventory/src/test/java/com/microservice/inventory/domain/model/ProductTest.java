@@ -1,5 +1,6 @@
 package com.microservice.inventory.domain.model;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
@@ -41,4 +42,20 @@ public class ProductTest {
                 "Descripción del producto", 
                 new Price(new BigDecimal("190.99"))));
     }
+
+    @Test
+    @DisplayName("Actualizar el nombre de un producto")
+    void updateProductName() {
+        Product product = new Product(1L, 
+            new Sku("SKU123"), 
+            "Producto de prueba", 
+            "Descripción del producto", 
+            new Price(new BigDecimal("190.99")));
+
+        Product updatedProduct = product.updateName("Producto actualizado");
+
+        assert updatedProduct.getName().equals("Producto actualizado");
+        assertFalse(product == updatedProduct);
+    }
+
 }
