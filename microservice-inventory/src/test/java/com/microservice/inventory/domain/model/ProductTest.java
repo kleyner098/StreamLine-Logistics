@@ -60,4 +60,48 @@ public class ProductTest {
         assertFalse(product == updatedProduct);
     }
 
+    @Test
+    @DisplayName("Actualizar el SKU de un producto")
+    void updateProductSku() {
+        Product product = new Product(1L, 
+            new Sku("SKU123"), 
+            "Producto de prueba", 
+            "Descripción del producto", 
+            new Price(new BigDecimal("190.99")));
+
+        Product updatedProduct = product.updateSku(new Sku("SKU456"));
+
+        assert updatedProduct.getSku().value().equals("SKU456");
+        assertFalse(product == updatedProduct);
+    }
+
+    @Test
+    @DisplayName("Actualizar el precio de un producto")
+    void updateProductPrice() {
+        Product product = new Product(1L, 
+            new Sku("SKU123"), 
+            "Producto de prueba", 
+            "Descripción del producto", 
+            new Price(new BigDecimal("190.99")));   
+        
+        Product updatedProduct = product.updatePrice(new Price(new BigDecimal("150.50")));
+
+        assert updatedProduct.getPrice().amount().compareTo(new BigDecimal("150.50")) == 0;
+        assertFalse(product == updatedProduct);
+    }
+
+    @Test
+    @DisplayName("Actualizar la descripción de un producto")
+    void updateProductDescription() {
+        Product product = new Product(1L,
+            new Sku("SKU123"), 
+            "Producto de prueba", 
+            "Descripción del producto", 
+            new Price(new BigDecimal("190.99")));
+     
+        Product updatedProduct = product.withDescription("Nueva descripción");
+     
+        assert updatedProduct.getDescription().equals("Nueva descripción");
+        assertFalse(product == updatedProduct);
+    }
 }
