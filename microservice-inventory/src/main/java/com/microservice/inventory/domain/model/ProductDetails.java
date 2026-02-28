@@ -14,7 +14,7 @@ public record ProductDetails(Product product,
             throw new DomainException("El stock no puede ser nulo");
         }
 
-        if (product.getId() != stock.getProductId()) {
+        if (!product.getId().equals(stock.getProductId())) {
             throw new DomainException("El producto y el stock no corresponden al mismo producto");
         }
     }
