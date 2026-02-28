@@ -2,6 +2,7 @@ package com.microservice.inventory.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 
@@ -35,12 +36,13 @@ public class ProductTest {
     @Test
     @DisplayName("Crear un producto sin nombre")
     void createProductWitoutName() {
-        assertThrows( DomainException.class, 
+        DomainException exception = assertThrows( DomainException.class, 
             () -> new Product(1L, 
                 new Sku("SKU123"), 
                 null, 
                 "Descripción del producto", 
                 new Price(new BigDecimal("190.99"))));
+        assertTrue(exception.getMessage().equals("Nombre inválido"));
     }
 
     @Test
