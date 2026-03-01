@@ -8,7 +8,7 @@ public record ProductDetails(Product product,
 
     public ProductDetails {
 
-        if (!product.getId().equals(stock.getProductId())) {
+        if (product != null && stock != null && !product.getId().equals(stock.getProductId())) {
             throw new DomainException("El producto y el stock no corresponden al mismo producto");
         }
     }
