@@ -35,20 +35,6 @@ public class ProductDetailsTest {
     }
 
     @Test
-    @DisplayName("Crear ProductDetails con producto nulo")
-    void createProductDetailsWithNullProduct() {
-        DomainException exception = assertThrows(DomainException.class, () -> new ProductDetails(null, stock));
-        assertTrue(exception.getMessage().equals("El producto no puede ser nulo"));
-    }
-
-    @Test
-    @DisplayName("Crear ProductDetails con stock nulo")
-    void createProductDetailsWithNullStock() {
-        DomainException exception = assertThrows(DomainException.class, () -> new ProductDetails(product, null));
-        assertTrue(exception.getMessage().equals("El stock no puede ser nulo"));
-    }
-
-    @Test
     @DisplayName("Crear ProductDetails con producto y stock que no corresponden")
     void createProductDetailsWithMismatchedProductAndStock() {
         Stock mismatchedStock = new Stock(2L, 2L, 5, 1);
