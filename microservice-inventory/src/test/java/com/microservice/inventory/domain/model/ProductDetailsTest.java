@@ -56,4 +56,12 @@ public class ProductDetailsTest {
         ProductDetails productDetails = new ProductDetails(product, stock);
         assertTrue(productDetails.isOutOfStock() == false);
     }
+
+    @Test
+    @DisplayName("Producto y stock con diferentes IDs de producto")
+    void checkProductAndStockWithDifferentProductIds() {
+        Stock differentStock = new Stock(2L, 2L, 5, 1);
+        DomainException exception = assertThrows(DomainException.class, () -> new ProductDetails(product, differentStock));
+        assertTrue(exception.getMessage().equals("El producto y el stock no corresponden al mismo producto"));
+    }
 }
