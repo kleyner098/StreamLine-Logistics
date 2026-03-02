@@ -33,11 +33,12 @@ public class ProductRepositoryAdapterTest extends BaseRepositoryTest {
         productEntityMapper = new ProductEntityMapperImpl();
         productRepositoryAdapter = new ProductRepositoryAdapter(jpaProductRepository, productEntityMapper);
 
-        jpaProductRepository.deleteAll(); // Limpiar la base de datos antes de cada prueba
+        // Limpiar la base de datos antes de cada prueba
+        jpaProductRepository.deleteAll(); 
 
         //Guardar un producto de prueba en la base de datos
-        ProductEntity product = new ProductEntity(1L, "SKU123", "Producto test", null, new BigDecimal("11.99"));
-        productId = jpaProductRepository.save(product).getId();
+        Product product = new Product(1L, new Sku("SKU123"), "Producto test", null, new Price(new BigDecimal("11.99")));
+        productId = productRepositoryAdapter.save(product).getId();
     }
 
     @Test
@@ -45,10 +46,10 @@ public class ProductRepositoryAdapterTest extends BaseRepositoryTest {
     void saveProductInDatabase(){
 
         //Given
-        Product product = new Product(2L, new Sku("SKU456"), "Producto test", null, new Price(new BigDecimal("10.99")));
+        Product newpProduct = new Product(2L, new Sku("SKU456"), "Producto test", null, new Price(new BigDecimal("10.99")));
 
         //When
-        Product savedProductEntity = productRepositoryAdapter.save(product);
+        Product savedProductEntity = productRepositoryAdapter.save(newpProduct);
 
         //then
         assertNotNull(savedProductEntity.getId());
