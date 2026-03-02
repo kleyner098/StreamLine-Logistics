@@ -1,4 +1,4 @@
-package com.microservice.inventory.infrastructure;
+package com.microservice.inventory.infrastructure.shared;
 
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
