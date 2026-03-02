@@ -36,8 +36,8 @@ public class ProductRepositoryAdapterTest extends BaseRepositoryTest {
         jpaProductRepository.deleteAll(); // Limpiar la base de datos antes de cada prueba
 
         //Guardar un producto de prueba en la base de datos
-        Product product = new Product(1L, new Sku("SKU123"), "Producto test", null, new Price(new BigDecimal("11.99")));
-        productId = productRepositoryAdapter.save(product).getId();
+        ProductEntity product = new ProductEntity(1L, "SKU123", "Producto test", null, new BigDecimal("11.99"));
+        productId = jpaProductRepository.save(product).getId();
     }
 
     @Test
