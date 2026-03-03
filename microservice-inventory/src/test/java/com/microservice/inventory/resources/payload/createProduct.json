@@ -1,0 +1,7 @@
+{
+    "sku": "prueba",
+    "name": "camisa de prueba",
+    "description": "Tests",
+    "price": 10.99,
+    "stock": 100
+}
