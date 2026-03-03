@@ -1,4 +1,4 @@
-package com.microservice.inventory.infrastructure.shared;
+package com.microservice.inventory.shared;
 
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.containers.MySQLContainer;

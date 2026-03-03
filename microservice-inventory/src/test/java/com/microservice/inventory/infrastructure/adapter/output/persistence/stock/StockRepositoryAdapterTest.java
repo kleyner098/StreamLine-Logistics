@@ -1,4 +1,4 @@
-package com.microservice.inventory.infrastructure.adapter.output.persistence.Product;
+package com.microservice.inventory.infrastructure.adapter.output.persistence.stock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.microservice.inventory.domain.model.Stock;
+import com.microservice.inventory.infrastructure.adapter.output.persistence.BaseRepositoryTest;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.Stock.JpaStockRepository;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.Stock.StockRepositoryAdapter;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.mappers.StockEntityMapperImpl;
-import com.microservice.inventory.infrastructure.shared.BaseRepositoryTest;
 
 public class StockRepositoryAdapterTest extends BaseRepositoryTest {
 

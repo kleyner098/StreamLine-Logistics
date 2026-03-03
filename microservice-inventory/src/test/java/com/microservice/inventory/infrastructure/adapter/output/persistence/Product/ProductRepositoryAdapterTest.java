@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.microservice.inventory.domain.model.Product;
 import com.microservice.inventory.domain.valueobject.Price;
 import com.microservice.inventory.domain.valueobject.Sku;
+import com.microservice.inventory.infrastructure.adapter.output.persistence.BaseRepositoryTest;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.mappers.ProductEntityMapperImpl;
-import com.microservice.inventory.infrastructure.shared.BaseRepositoryTest;
 
 
 public class ProductRepositoryAdapterTest extends BaseRepositoryTest {
