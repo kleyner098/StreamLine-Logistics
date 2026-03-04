@@ -1,17 +1,17 @@
 package com.microservice.inventory.shared;
 
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 
 
-@Testcontainers
 public interface MySQLTestContainer {
     
-    @Container
-    @ServiceConnection
+    //@ServiceConnection
     static MySQLContainer<?> mysqlContainer = new MySQLContainer<>("mysql:8.0")
             .withDatabaseName("testdb")
             .withUsername("testuser")
@@ -23,12 +23,17 @@ public interface MySQLTestContainer {
     // dinámicas con @DynamicPropertySource.
 
     // Registramos las propiedades dinámicamente (puerto aleatorio que asigne Docker)
-    /*@DynamicPropertySource
+    @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
+
+        if (!mysqlContainer.isRunning()) {
+            mysqlContainer.start();
+        }
+        
         registry.add("spring.datasource.url", mysqlContainer::getJdbcUrl);
         registry.add("spring.datasource.username", mysqlContainer::getUsername);
         registry.add("spring.datasource.password", mysqlContainer::getPassword);
         registry.add("spring.datasource.driver-class-name", () -> "com.mysql.cj.jdbc.Driver");
-    }*/
+    }
 
 }
