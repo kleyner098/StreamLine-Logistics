@@ -12,6 +12,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * DTO para la creación de un producto.
+ * Contiene los datos necesarios para crear un nuevo producto en el sistema.
+ * Incluye validaciones para asegurar que los datos sean correctos antes de ser procesados por la capa de aplicación.
+ */
 @Data
 @Builder
 @NoArgsConstructor
