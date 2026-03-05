@@ -2,6 +2,13 @@ package com.microservice.inventory.domain.model;
 
 import com.microservice.inventory.domain.exception.DomainException;
 
+
+/**
+ * Representa los detalles de un producto, incluyendo su información básica y su stock disponible.
+ *
+ * @param product La información básica del producto.
+ * @param stock   El stock disponible del producto.
+ */
 public record ProductDetails(Product product,
     Stock stock
 ) {
