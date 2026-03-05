@@ -10,13 +10,16 @@ import com.microservice.inventory.domain.valueobject.Price;
 import com.microservice.inventory.domain.valueobject.Sku;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.Product.ProductEntity;
 
+/**
+ * Mapeador para convertir entidades de producto a modelos de dominio.
+ */
 @Mapper(componentModel = "spring")
 public interface ProductEntityMapper {
 
     @Mapping(target = "sku", source = "sku.value") // Extrae el String del record Sku
     @Mapping(target = "price", source = "price.amount") // Extrae el BigDecimal de Price
     ProductEntity toEntity(Product model);
-
+    
     default Product toDomain(ProductEntity entity) {
         if (entity == null) return null;
         
