@@ -5,6 +5,9 @@ import org.mapstruct.Mapper;
 import com.microservice.inventory.domain.model.Stock;
 import com.microservice.inventory.infrastructure.adapter.output.persistence.Stock.StockEntity;
 
+/**
+ * Mapeador para convertir entidades de stock a modelos de dominio.
+ */
 @Mapper(componentModel = "spring")
 public interface StockEntityMapper {
  
