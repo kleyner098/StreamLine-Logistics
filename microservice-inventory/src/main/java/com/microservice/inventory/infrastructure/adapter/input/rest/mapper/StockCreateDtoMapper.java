@@ -6,7 +6,9 @@ import org.mapstruct.Mapping;
 import com.microservice.inventory.application.dto.ProductCreateDto;
 import com.microservice.inventory.domain.model.Stock;
 
-
+/**
+ * Mapeador para convertir DTOs de creación de stock a modelos de dominio.
+ */
 @Mapper(componentModel = "spring")
 public interface StockCreateDtoMapper {
 
