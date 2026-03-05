@@ -14,6 +14,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+/**
+ * Entidad JPA para representar un producto en la base de datos.
+ * Esta clase se utiliza para mapear los datos de los productos a la tabla "products" en la base de datos.
+ * No debe contener lógica de negocio, solo atributos y anotaciones para la persistencia.
+ */
 @Entity
 @Table(name = "products")
 @Getter
