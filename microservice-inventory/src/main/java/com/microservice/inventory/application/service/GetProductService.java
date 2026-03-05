@@ -9,6 +9,14 @@ import com.microservice.inventory.domain.model.Product;
 import com.microservice.inventory.domain.model.ProductDetails;
 import com.microservice.inventory.domain.model.Stock;
 
+
+/**
+ * Servicio para la obtención de detalles de productos.
+ * <p>
+ * Este servicio se encarga de recuperar la información detallada de un producto específico o de todos los productos disponibles en el sistema. 
+ * Utiliza los repositorios de productos y stock para obtener la información necesaria y 
+ * construir objetos ProductDetails que contienen tanto los datos del producto como su stock asociado.
+ */
 public class GetProductService implements GetProductDetailsUseCase{
 
     private final ProductRepository productRepository;
@@ -19,6 +27,15 @@ public class GetProductService implements GetProductDetailsUseCase{
         this.stockRepository = stockRepository;
     }
 
+    /**
+     * Obtiene los detalles de un producto específico por su ID.
+     * 
+     * Utiliza el repositorio de productos {@link ProductRepository} para recuperar la información del producto,
+     * y el repositorio de stock {@link StockRepository} para obtener la información del stock asociado al producto.
+     *
+     * @param productId El ID del producto del cual se desean obtener los detalles.
+     * @return Un objeto ProductDetails que contiene la información del producto y su stock asociado, o null si el producto no existe.
+     */
     @Override
     public ProductDetails getProductDetails(Long productId) {
         
@@ -28,6 +45,14 @@ public class GetProductService implements GetProductDetailsUseCase{
         return new ProductDetails(product, stock);
     }
 
+    /**
+     * Obtiene los detalles de todos los productos disponibles en el sistema.
+     * 
+     * Utiliza el repositorio de productos {@link ProductRepository} para recuperar la información de todos los productos,
+     * y el repositorio de stock {@link StockRepository} para obtener la información del stock asociado a cada producto.
+     *
+     * @return Una lista de objetos ProductDetails que contienen la información de todos los productos y su stock asociado.
+     */
     @Override
     public ArrayList<ProductDetails> getAllProducts() {
         ArrayList<ProductDetails> allProducts = new ArrayList<>();
