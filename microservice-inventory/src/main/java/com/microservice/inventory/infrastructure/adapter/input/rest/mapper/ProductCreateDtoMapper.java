@@ -7,6 +7,9 @@ import com.microservice.inventory.domain.model.Product;
 import com.microservice.inventory.domain.valueobject.Price;
 import com.microservice.inventory.domain.valueobject.Sku;
 
+/**
+ * Mapeador para convertir DTOs de creación de producto a modelos de dominio.
+ */
 @Mapper(componentModel = "spring")
 public interface ProductCreateDtoMapper {
 
