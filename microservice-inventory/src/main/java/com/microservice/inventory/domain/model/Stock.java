@@ -30,11 +30,21 @@ public class Stock {
 
     // Métodos de cambio de estado
 
+    /**
+     * Agrega una cantidad de stock al stock total del producto. La cantidad agregada no puede ser negativa.
+     * @param amount
+     * @return Una nueva instancia de Stock con la cantidad total actualizada. Si la cantidad agregada es negativa, se lanza una excepción.
+     */
     public Stock addStock(int amount) {
         validateQuantity(amount);
         return new Stock(this.id, this.productId, this.totalQuantity + amount, this.totalReserved);
     }
 
+    /**
+     * Confirma una reserva de stock, reduciendo tanto la cantidad total como la cantidad reservada en la cantidad especificada.
+     * @param amount
+     * @return Una nueva instancia de Stock con la cantidad total y la cantidad reservada actualizadas. Si no hay suficiente stock reservado para confirmar, se lanza una excepción.
+     */
     public Stock confirmReservation(int amount) {
         if (amount > totalReserved) throw new DomainException("No hay suficiente stock reservado para reducir. Stock reservado: " + totalReserved);
         validateReserved(amount, totalQuantity);
@@ -45,7 +55,7 @@ public class Stock {
     /**
      * Reserva una cantidad de stock disponible para un pedido.
      * @param amount
-     * @return
+     * @return Una nueva instancia de Stock con la cantidad reservada actualizada. Si no hay suficiente stock disponible, se lanza una excepción.
      */
     public Stock reserveStock(int amount) {
         if (amount > available()) throw new DomainException("No hay suficiente stock disponible para reservar. Stock disponible: " + available());
@@ -56,7 +66,7 @@ public class Stock {
     /**
      * Libera una cantidad de stock reservada.
      * @param amount
-     * @return
+     * @return Una nueva instancia de Stock con la cantidad reservada actualizada. Si no hay suficiente stock reservado, se lanza una excepción.
      */
     public Stock releaseStock(int amount) {
         if (amount > totalReserved) throw new DomainException("No hay suficiente stock reservado para liberar. Stock reservado: " + totalReserved);
