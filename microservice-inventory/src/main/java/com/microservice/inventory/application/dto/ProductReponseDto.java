@@ -8,6 +8,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * DTO para la respuesta de un producto.
+ * Contiene los datos necesarios para devolver información sobre un producto en el sistema.
+ */
 @Data
 @Builder
 @AllArgsConstructor
