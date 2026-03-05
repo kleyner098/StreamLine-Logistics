@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 import com.microservice.inventory.domain.exception.DomainException;
 
+/**
+ * Representa el precio de un producto.
+ */
 public record Price(BigDecimal amount) {
     public Price {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
