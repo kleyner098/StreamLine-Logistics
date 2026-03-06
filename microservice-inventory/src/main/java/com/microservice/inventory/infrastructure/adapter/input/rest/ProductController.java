@@ -25,8 +25,14 @@ import com.microservice.inventory.domain.model.Stock;
 import com.microservice.inventory.infrastructure.adapter.input.rest.mapper.ProductCreateDtoMapper;
 import com.microservice.inventory.infrastructure.adapter.input.rest.mapper.StockCreateDtoMapper;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1/products")
+@Tag(name = "Product API", description = "API para la gestion de productos")
 public class ProductController {
 
     private final GetProductDetailsUseCase getProductDetailsUseCase;
@@ -47,6 +53,16 @@ public class ProductController {
         this.productCreateDtoMapper = productCreateDtoMapper;
     }
 
+    /**
+     * Endpoint para obtener la lista de productos con su stock
+     * @return ResponseEntity con la lista de productos y su stock
+     */
+    @Operation(
+        summary = "Obtener lista de productos", 
+        description = "Obtiene una lista de todos los productos con su stock")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de productos obtenida exitosamente")
+    })
     @GetMapping()
     public ResponseEntity<List<ProductReponseDto>> getProducts() {
         
@@ -57,6 +73,18 @@ public class ProductController {
         return ResponseEntity.ok(responseList);
     }
 
+    /**
+     * Endpoint para obtener los detalles de un producto por su ID
+     * @param id el ID del producto
+     * @return ResponseEntity con los detalles del producto
+     */
+    @Operation(
+        summary = "Obtener detalles de un producto", 
+        description = "Obtiene los detalles de un producto por su ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Detalles del producto obtenidos exitosamente"),
+        @ApiResponse(responseCode = "404", description = "Producto no encontrado")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<ProductReponseDto> getProductById(@PathVariable Long id) {
     
@@ -71,6 +99,18 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Endpoint para crear un nuevo producto
+     * @param createDto los datos para crear el producto
+     * @return ResponseEntity con los detalles del producto creado
+     */
+    @Operation(
+        summary = "Crear un nuevo producto", 
+        description = "Crea un nuevo producto con los datos proporcionados")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Producto creado exitosamente"),
+        @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos")
+    })
     @PostMapping()
     public ResponseEntity<ProductReponseDto> createProduct(@Valid @RequestBody ProductCreateDto createDto){
 
