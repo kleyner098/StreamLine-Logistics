@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/v1/products")
+@RequestMapping("/api/v1/inventory")
 @Tag(name = "Product API", description = "API para la gestion de productos")
 public class ProductController {
 

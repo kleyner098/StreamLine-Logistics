@@ -79,7 +79,7 @@ public class ProductControllerTest {
         BDDMockito.given(getProductDetailsUseCase.getProductDetails(productId)).willReturn(productDetails);
 
         // When & Then
-        mockMvc.perform(get("/api/v1/products/{id}", productId))
+        mockMvc.perform(get("/api/v1/inventory/{id}", productId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Producto 1"))
                 .andExpect(jsonPath("$.description").value("Descripción del producto 1"))
@@ -94,7 +94,7 @@ public class ProductControllerTest {
         BDDMockito.given(getProductDetailsUseCase.getProductDetails(productId)).willReturn(new ProductDetails(null, null));
 
         // When & Then
-        mockMvc.perform(get("/api/v1/products/{id}", productId))
+        mockMvc.perform(get("/api/v1/inventory/{id}", productId))
                 .andExpect(status().isNotFound());
     }
 
@@ -108,7 +108,7 @@ public class ProductControllerTest {
         BDDMockito.given(getProductDetailsUseCase.getAllProducts()).willReturn(productDetailsList);
 
         // When & Then
-        mockMvc.perform(get("/api/v1/products"))
+        mockMvc.perform(get("/api/v1/inventory"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(1))
@@ -136,7 +136,7 @@ public class ProductControllerTest {
         BDDMockito.given(createProductUseCase.createProduct(any(), any())).willReturn(new ProductDetails(product, stock));
 
         // When & Then
-        mockMvc.perform(post("/api/v1/products")
+        mockMvc.perform(post("/api/v1/inventory")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createDto)))
                 .andExpect(status().isCreated())
