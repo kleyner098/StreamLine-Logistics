@@ -25,4 +25,6 @@ public interface StockRepository {
      * @return El stock guardado o actualizado.
      */
     Stock save(Long productId, Stock stock);
+
+    void update(Stock stock);
 }

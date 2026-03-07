@@ -54,4 +54,16 @@ public class StockRepositoryAdapter implements StockRepository{
         return stockEntityMapper.toDomain(newStockEntity);
     
     }
+
+    /**
+     * Actualiza el stock de un producto.
+     *
+     * @param stock El modelo de dominio del stock a actualizar.
+     */
+    @Override
+    public void update(Stock stock) {
+
+        StockEntity stockEntity = stockEntityMapper.toEntity(stock);
+        jpaStockRepository.save(stockEntity);
+    }
 }

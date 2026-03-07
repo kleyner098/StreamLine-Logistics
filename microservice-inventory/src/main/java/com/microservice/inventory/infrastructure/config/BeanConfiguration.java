@@ -8,6 +8,7 @@ import com.microservice.inventory.application.port.output.ProductRepository;
 import com.microservice.inventory.application.port.output.StockRepository;
 import com.microservice.inventory.application.service.CreateProductService;
 import com.microservice.inventory.application.service.GetProductService;
+import com.microservice.inventory.application.service.UpdateStockService;
 
 
 /**
@@ -45,5 +46,16 @@ public class BeanConfiguration {
     @Bean
     public CreateProductService createProductService(ProductRepository productRepository, StockRepository stockRepository) {
         return new CreateProductService(productRepository, stockRepository);
+    }
+
+    /**
+     * Bean para el caso de uso de actualizar el stock.
+     * Se inyecta el adaptador de salida para stock {@link StockRepository}.
+     * @param stockRepository Implementación de persistencia para stock  (MySQL/JPA).
+     * @return Instancia de {@link UpdateStockService} que implementa {@link UpdateStockUseCase}.
+     */
+    @Bean
+    public UpdateStockService updateStockService(StockRepository stockRepository) {
+        return new UpdateStockService(stockRepository);
     }
 }
