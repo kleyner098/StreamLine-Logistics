@@ -46,6 +46,8 @@ public class Stock {
      * @return Una nueva instancia de Stock con la cantidad total y la cantidad reservada actualizadas. Si no hay suficiente stock reservado para confirmar, se lanza una excepción.
      */
     public Stock confirmReservation(int amount) {
+        if(totalQuantity == 0) throw new DomainException("No hay stock disponible para confirmar la reserva.");
+        if(totalReserved == 0) throw new DomainException("No hay stock reservado para confirmar.");
         if (amount > totalReserved) throw new DomainException("No hay suficiente stock reservado para reducir. Stock reservado: " + totalReserved);
         validateReserved(amount, totalQuantity);
         validateQuantity(amount);
@@ -69,6 +71,7 @@ public class Stock {
      * @return Una nueva instancia de Stock con la cantidad reservada actualizada. Si no hay suficiente stock reservado, se lanza una excepción.
      */
     public Stock releaseStock(int amount) {
+        if(totalReserved == 0) throw new DomainException("No hay stock reservado para liberar.");
         if (amount > totalReserved) throw new DomainException("No hay suficiente stock reservado para liberar. Stock reservado: " + totalReserved);
         validateReserved(amount, totalQuantity);
         return new Stock(this.id, this.productId, this.totalQuantity, this.totalReserved - amount);
