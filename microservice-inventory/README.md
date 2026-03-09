@@ -6,6 +6,68 @@ Este servicio se encarga de gestionar el inventario de productos, asegurando que
 
 Utiliza una base de datos MySQL para almacenar la información de los productos y sus cantidades disponibles, lo que permite un rendimiento eficiente en las operaciones de lectura y escritura necesarias para mantener el inventario actualizado.
 
+## Estructura del Proyecto
+
+```Árbol de directorios
+com.microservice.inventory/
+├── MicroserviceInventoryApplication.java
+├── domain/
+│   ├── model/
+│   │   ├── Product.java
+│   │   ├── Stock.java
+│   │   └── ProductDetails.java
+│   ├── valueobject/
+│   │   ├── Sku.java
+│   │   └── Price.java
+│   └── exception/
+│       └── DomainException.java
+├── application/
+│   ├── port/
+│   │   ├── input/
+│   │   │   ├── CreateProductUseCase.java
+│   │   │   ├── GetProductDetailsUseCase.java
+│   │   │   └── UpdateStockUseCase.java
+│   │   └── output/
+│   │       ├── ProductRepository.java
+│   │       └── StockRepository.java
+│   ├── service/
+│   │   ├── CreateProductService.java
+│   │   ├── GetProductService.java
+│   │   └── UpdateStockService.java
+│   ├── dto/
+│   │   ├── ProductCreateDto.java
+│   │   ├── ProductReponseDto.java
+│   │   └── StockQuantityDTO.java
+│   ├── mapper/
+│   │   └── ProductResponseDtoMapper.java
+│   └── exception/
+│       └── ApplicationException.java
+└── infrastructure/
+    ├── adapter/
+    │   ├── input/
+    │   │   └── rest/
+    │   │       ├── ProductController.java
+    │   │       └── mapper/
+    │   │           ├── ProductCreateDtoMapper.java
+    │   │           └── StockCreateDtoMapper.java
+    │   └── output/
+    │       └── persistence/
+    │           ├── Product/
+    │           │   ├── ProductEntity.java
+    │           │   ├── JpaProductRepository.java
+    │           │   └── ProductRepositoryAdapter.java
+    │           ├── Stock/
+    │           │   ├── StockEntity.java
+    │           │   ├── JpaStockRepository.java
+    │           │   └── StockRepositoryAdapter.java
+    │           └── mappers/
+    │               ├── ProductEntityMapper.java
+    │               └── StockEntityMapper.java
+    └── config/
+        ├── OpenAPIConfig.java
+        └── BeanConfiguration.java
+```
+
 ## Modelado de Datos
 
 El modelo de datos para el servicio de inventario incluye una tabla principal llamada `products`, que contiene los siguientes campos:
