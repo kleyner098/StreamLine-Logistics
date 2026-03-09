@@ -43,6 +43,16 @@ erDiagram
 
 ## Endpoints
 
+Url base local: `http://localhost:9090/api/v1/inventory`
+
+- `GET /`: Obtener la lista de productos.
+- `GET /{id}`: Obtener información de un producto específico.
+- `POST /`: Crear un nuevo producto.
+- `POST /{id}/addStock`: Añadir una cantidad de stock a un producto existente.
+- `POST /{id}/reserveStock`: Reservar una cantidad de un producto para una orden en proceso.
+- `POST /{id}/releaseStock`: Liberar una cantidad de un producto reservada previamente, en caso de que la orden sea cancelada o no se confirme la venta.
+- `POST /{id}/consumeStock`: Confirmar la venta de una cantidad de un producto, reduciendo el stock disponible y liberando la cantidad reservada.
+
 ## Aclaraciones
 
 Las entidades `Product`y `Stock` no estan unidas por una relación directa con la anotación `@OneToOne` para evitar problemas de rendimiento y complejidad en las consultas. En su lugar, se utiliza el campo `productId` en la entidad `Stock` para establecer una relación lógica entre ambas entidades, lo que permite una gestión más eficiente del inventario sin necesidad de cargar toda la información del producto cada vez que se accede al stock. Además, esto facilita la creación de mappers personalizados para convertir entre las entidades de dominio y las entidades de persistencia, lo que mejora la flexibilidad y el rendimiento del sistema.
