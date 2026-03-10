@@ -86,6 +86,7 @@ Se responde al cliente con el ID del pedido.
 - Entidad ```OrderItem``` (Relación OneToMany)
   - ```id```: Long
   - ```productId```: Long (Referencia al producto en el inventario)
+  - ```orderId```: Long (Referencia a la orden a la que pertenece este item)
   - ```quantity```: Integer
   - ```priceAtPurchase```: BigDecimal (Importante guardar el precio del momento, no el actual)
 

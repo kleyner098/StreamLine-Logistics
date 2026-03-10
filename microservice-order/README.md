@@ -21,6 +21,7 @@ También se incluye una tabla de `OrderItem` para gestionar las cantidades dispo
 
 - ```id```: Long
 - ```productId```: Long (Referencia al producto en el inventario)
+- ```orderId```: Long (Referencia a la orden a la que pertenece este item)
 - ```quantity```: Integer
 - ```priceAtPurchase```: BigDecimal (Importante guardar el precio del momento, no el actual)
 
@@ -38,6 +39,7 @@ erDiagram
     }
     OrderItem {
         Long id PK
+        Long orderId FK
         Long productId
         Integer quantity
         BigDecimal priceAtPurchase
