@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import com.microservice.order.domain.exception.DomainException;
 
-public class OderItem {
+public class OrderItem {
 
     private final Long id;
     private final Long orderId;
@@ -12,7 +12,7 @@ public class OderItem {
     private final int quantity;
     private final BigDecimal priceAtPurchase;
 
-    public OderItem(Long id, Long orderId, Long productId, int quantity, BigDecimal priceAtPurchase) {
+    public OrderItem(Long id, Long orderId, Long productId, int quantity, BigDecimal priceAtPurchase) {
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
@@ -21,12 +21,12 @@ public class OderItem {
     }
 
     // Métodos de cambio de estado (Inmutabilidad)
-    public OderItem updateQuantity(int newQuantity) {
-        return new OderItem(this.id, this.orderId, this.productId, newQuantity, this.priceAtPurchase);
+    public OrderItem updateQuantity(int newQuantity) {
+        return new OrderItem(this.id, this.orderId, this.productId, newQuantity, this.priceAtPurchase);
     }
 
-    public OderItem updatePrice(BigDecimal newPrice) {
-        return new OderItem(this.id, this.orderId, this.productId, this.quantity, newPrice);
+    public OrderItem updatePrice(BigDecimal newPrice) {
+        return new OrderItem(this.id, this.orderId, this.productId, this.quantity, newPrice);
     }
 
     // Validaciones
