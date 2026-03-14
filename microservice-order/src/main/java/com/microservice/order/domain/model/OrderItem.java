@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 
 import com.microservice.order.domain.exception.DomainException;
 
+/**
+ * Clase de dominio que representa un ítem de una orden de compra.
+ * Esta clase es inmutable, lo que significa que una vez creada, su estado no puede cambiar.
+ */
 public class OrderItem {
 
     private final Long id;
@@ -21,10 +25,21 @@ public class OrderItem {
     }
 
     // Métodos de cambio de estado (Inmutabilidad)
+    
+    /**
+     * Actualiza la cantidad de un ítem de la orden. Solo se puede actualizar si la orden está en estado PENDING.
+     * @param newQuantity Nueva cantidad del ítem.
+     * @return Nuevo ítem con la cantidad actualizada.
+     */
     public OrderItem updateQuantity(int newQuantity) {
         return new OrderItem(this.id, this.orderId, this.productId, newQuantity, this.priceAtPurchase);
     }
 
+    /**
+     * Actualiza el precio de un ítem de la orden. Solo se puede actualizar si la orden está en estado PENDING.
+     * @param newPrice Nuevo precio del ítem.
+     * @return Nuevo ítem con el precio actualizado.
+     */
     public OrderItem updatePrice(BigDecimal newPrice) {
         return new OrderItem(this.id, this.orderId, this.productId, this.quantity, newPrice);
     }
