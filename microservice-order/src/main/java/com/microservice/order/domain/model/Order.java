@@ -7,6 +7,12 @@ import java.util.List;
 
 import com.microservice.order.domain.exception.DomainException;
 
+
+/**
+ * Clase de dominio que representa una orden de compra. 
+ * Esta clase es inmutable, lo que significa que una vez creada, su estado no puede cambiar. 
+ * Cualquier operación que modifique el estado de la orden debe devolver una nueva instancia de Order.
+ */
 public class Order {
 
     private final Long id;
@@ -32,6 +38,10 @@ public class Order {
 
     // Métodos de cambio de estado (Inmutabilidad)
 
+    /**
+     * Agrega un ítem a la orden. Solo se pueden agregar ítems si la orden está en estado PENDING.
+     * @param item
+     */
     public void addItem(OrderItem item) {
         if (this.status != Status.PENDING) {
             throw new IllegalStateException("No se pueden añadir ítems si el pedido no está pendiente.");
@@ -39,6 +49,10 @@ public class Order {
         this.items.add(item);
     }
 
+    /**
+     * Elimina un ítem de la orden. Solo se pueden eliminar ítems si la orden está en estado PENDING.
+     * @param item
+     */
     public void removeItem(OrderItem item) {
         if (this.status != Status.PENDING) {
             throw new IllegalStateException("No se pueden eliminar ítems si el pedido no está pendiente.");
@@ -72,5 +86,9 @@ public class Order {
     public Long getCustomerId() {return customerId;}
     public Status getStatus() {return status;}
     public BigDecimal getTotalAmount() {return totalAmount;}
+    /**
+     * Devuelve una lista inmutable de los ítems de la orden para preservar la inmutabilidad de la clase.
+     * @return Lista inmutable de ítems de la orden.
+     */
     public List<OrderItem> getItems() {return Collections.unmodifiableList(items);}
 }
