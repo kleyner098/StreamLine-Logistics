@@ -3,9 +3,11 @@ package com.microservice.order.infrastructure.adapter.output.persistance.orderIt
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.microservice.order.domain.model.OrderItem;
-
+/**
+ * Repositorio JPA para la entidad OrderItem. 
+ * Proporciona métodos CRUD y consultas personalizadas para gestionar los items de las órdenes en la base de datos.
+ */
 @Repository
-public interface JpaOrderItemRepository extends JpaRepository<OrderItem, Long> {
+public interface JpaOrderItemRepository extends JpaRepository<OrderItemEntity, Long> {
 
 }
