@@ -1,10 +1,10 @@
 package com.microservice.order.application.port.input;
 
-import com.microservice.order.domain.model.OrderItem;
+import com.microservice.order.domain.model.Order;
 
 public interface CreateOrderUseCase {
 
     
-    public Long createOrder(String customerId, OrderItem item);
+    public Long createOrder(Order order);
     
 }
