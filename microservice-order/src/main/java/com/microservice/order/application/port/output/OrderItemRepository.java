@@ -4,6 +4,6 @@ import com.microservice.order.domain.model.OrderItem;
 
 public interface OrderItemRepository {
 
-    public Long save(OrderItem item);
+    public Long save(Long orderId, OrderItem item);
 
 }
