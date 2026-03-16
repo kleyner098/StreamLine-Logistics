@@ -11,8 +11,7 @@ spring:
     password: password
   jpa:
     hibernate:
-      # ddl-auto: update
-      ddl-auto: create
+      ddl-auto: validate
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
   config:
