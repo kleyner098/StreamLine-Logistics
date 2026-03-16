@@ -21,6 +21,12 @@ public class CreateOrderService implements CreateOrderUseCase {
         this.orderItemRepository = orderItemRepository;
     }
 
+    /**
+     * Crea una nueva orden y sus items asociados.
+     *
+     * @param order La orden a crear.
+     * @return El ID de la orden creada.
+     */
     @Override
     public Long createOrder(Order order) {
         
