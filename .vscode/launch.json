@@ -1,0 +1,68 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Debug: Config",
+            "request": "attach",
+            "projectName": "microservice-config",
+            "port": 5005,
+            "hostName": "localhost"
+        },
+        {
+            "type": "java",
+            "name": "Debug: Eureka",
+            "request": "attach",
+            "projectName": "microservice-eureka",
+            "port": 5006,
+            "hostName": "localhost"
+        },
+        {
+            "type": "java",
+            "name": "Debug: Gateway",
+            "request": "attach",
+            "projectName": "microservice-gateway",
+            "port": 5007,
+            "hostName": "localhost"
+        },
+        {
+            "type": "java",
+            "name": "Debug: Inventory",
+            "request": "attach",
+            "projectName": "microservice-inventory",
+            "port": 5008,
+            "hostName": "localhost"
+        },
+        {
+            "type": "java",
+            "name": "Debug: Order",
+            "request": "attach",
+            "projectName": "microservice-order",
+            "port": 5009,
+            "hostName": "localhost"
+        },
+        {
+            "type": "java",
+            "name": "Debug: Tracking",
+            "request": "attach",
+            "projectName": "microservice-tracking",
+            "port": 5010,
+            "hostName": "localhost"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug All Services",
+            "configurations": [
+                "Debug: Inventory",
+                "Debug: Order",
+                "Debug: Tracking",
+                "Debug: Eureka",
+            ]
+        }
+    ]
+}

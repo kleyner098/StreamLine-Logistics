@@ -1,0 +1,27 @@
+# Docker compose que sobrescribe el docker-compose.yml para agregar puertos de 
+# depuración a los servicios de Eureka, Inventory, Order y Tracking. Esto permite conectar 
+# un depurador remoto a cada servicio para facilitar la depuración durante el desarrollo.
+services:
+  eureka-server:
+    ports:
+      - "5006:5005"
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+  inventory-service:
+    ports:
+      - "5008:5005"
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+  order-service:
+    ports:
+      - "5009:5005"
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+  tracking-service:
+    ports:
+      - "5010:5005"
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+  
+  
+  
